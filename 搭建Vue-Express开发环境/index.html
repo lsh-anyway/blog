@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+
+    <title>
+        
+        搭建Vue + Express开发环境 - 林烁壕的博客
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/aircloud.css">
+    <link rel="stylesheet" href="/blog/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 混与躺轮回不止 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/blog/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>林烁壕</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/blog">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/blog/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#准备工作"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建-Express-服务器"><span class="toc-text">搭建 Express 服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-Express-实例"><span class="toc-text">创建 Express 实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖"><span class="toc-text">安装依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建开发环境"><span class="toc-text">搭建开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-webpack-配置"><span class="toc-text">修改 webpack 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建开发环境服务器启动文件"><span class="toc-text">创建开发环境服务器启动文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖-1"><span class="toc-text">安装依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建生产环境"><span class="toc-text">搭建生产环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-webpack-配置-1"><span class="toc-text">修改 webpack 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建生产环境服务器启动文件"><span class="toc-text">创建生产环境服务器启动文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖-2"><span class="toc-text">安装依赖</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改项目配置"><span class="toc-text">修改项目配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#修改-package-json"><span class="toc-text">修改 package.json</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-nodemon-json"><span class="toc-text">创建 nodemon.json</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装依赖-3"><span class="toc-text">安装依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#尾声"><span class="toc-text">尾声</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 混与躺轮回不止 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        搭建Vue + Express开发环境
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-06-19 17:01:50</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/blog/tags/#Vue" title="Vue">Vue</a>
+        <span>/</span>
+        
+        <a class="tag" href="/blog/tags/#Express" title="Express">Express</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>项目地址：<a href="https://github.com/lsh-anyway/vue-express-dev-template">https://github.com/lsh-anyway/vue-express-dev-template</a></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>使用 vue-cli 脚手架快速构建项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack vue-express-dev-template</span><br></pre></td></tr></table></figure>
+<p>生成的项目目录是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── build</span><br><span class="line">│   ├── dev-server.js</span><br><span class="line">│   ├── webpack.base.conf.js</span><br><span class="line">│   ├── webpack.dev.conf.js</span><br><span class="line">│   ├── webpack.prod.conf.js</span><br><span class="line">│   └── ...</span><br><span class="line">├── config</span><br><span class="line">│   ├── dev.env.js</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   └── prod.env.js</span><br><span class="line">├── src</span><br><span class="line">│   ├── main.js</span><br><span class="line">│   ├── App.vue</span><br><span class="line">│   ├── components</span><br><span class="line">│   │   └── ...</span><br><span class="line">│   └── assets</span><br><span class="line">│       └── ...</span><br><span class="line">├── static</span><br><span class="line">├── .babelrc</span><br><span class="line">├── .eslintrc.js</span><br><span class="line">├── index.html</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
+<h1 id="搭建-Express-服务器"><a href="#搭建-Express-服务器" class="headerlink" title="搭建 Express 服务器"></a>搭建 Express 服务器</h1><p>在项目根目录下创建 server 文件夹，用来放置后台相关的文件。完成后文件目录大致如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── build</span><br><span class="line">│   ├── dev-server.js</span><br><span class="line">│   ├── webpack.base.conf.js</span><br><span class="line">│   ├── webpack.dev.conf.js</span><br><span class="line">│   ├── webpack.prod.conf.js</span><br><span class="line">│   └── ...</span><br><span class="line">├── config</span><br><span class="line">│   ├── dev.env.js</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   └── prod.env.js</span><br><span class="line">├── src     // 前端</span><br><span class="line">│   ├── main.js</span><br><span class="line">│   ├── App.vue</span><br><span class="line">│   ├── components</span><br><span class="line">│   │   └── ...</span><br><span class="line">│   └── assets</span><br><span class="line">│       └── ...</span><br><span class="line">├── server  // 后台</span><br><span class="line">│   ├── app.js</span><br><span class="line">│   ├── config</span><br><span class="line">│   │   └── ...</span><br><span class="line">│   ├── controllers</span><br><span class="line">│   │   └── ...</span><br><span class="line">│   ├── models</span><br><span class="line">│   │   └── ...</span><br><span class="line">│   ├── routes</span><br><span class="line">│   │   └── ...</span><br><span class="line">│   └── public  // 前端代码 build 打包后生成文件的存放目录</span><br><span class="line">├── static</span><br><span class="line">├── dev-server.js   // 开发环境服务器启动文件</span><br><span class="line">├── prod-server.js  // 生产环境服务器启动文件</span><br><span class="line">├── .babelrc</span><br><span class="line">├── .eslintrc.js</span><br><span class="line">├── index.html</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
+<h2 id="创建-Express-实例"><a href="#创建-Express-实例" class="headerlink" title="创建 Express 实例"></a>创建 Express 实例</h2><p>在 server 文件夹下创建 app.js 文件，用于创建一个 Express 应用实例，内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>)</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">// Routers</span></span><br><span class="line"><span class="keyword">const</span> api = <span class="built_in">require</span>(<span class="string">'./routes/api'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中间件</span></span><br><span class="line">app.use(logger(<span class="string">'dev'</span>))</span><br><span class="line">app.use(bodyParser.json())</span><br><span class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment">// Routes</span></span><br><span class="line">app.use(<span class="string">'/api'</span>, api)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = app</span><br></pre></td></tr></table></figure>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S express morgan body-parser</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add express morgan body-parser</span><br></pre></td></tr></table></figure></p>
+<h2 id="搭建开发环境"><a href="#搭建开发环境" class="headerlink" title="搭建开发环境"></a>搭建开发环境</h2><h3 id="修改-webpack-配置"><a href="#修改-webpack-配置" class="headerlink" title="修改 webpack 配置"></a>修改 webpack 配置</h3><p>修改开发环境的 webpack 配置，主要是修改<code>bulid/webpack.dev.conf.js</code>文件，修改内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="keyword">const</span> utils = <span class="built_in">require</span>(<span class="string">'./utils'</span>)</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">'../config'</span>)</span><br><span class="line"><span class="keyword">const</span> merge = <span class="built_in">require</span>(<span class="string">'webpack-merge'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> baseWebpackConfig = <span class="built_in">require</span>(<span class="string">'./webpack.base.conf'</span>)</span><br><span class="line"><span class="keyword">const</span> CopyWebpackPlugin = <span class="built_in">require</span>(<span class="string">'copy-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line"><span class="comment">// const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')</span></span><br><span class="line"><span class="comment">// const portfinder = require('portfinder')</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// const HOST = process.env.HOST</span></span><br><span class="line"><span class="comment">// const PORT = process.env.PORT &amp;&amp; Number(process.env.PORT)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> devWebpackConfig = merge(baseWebpackConfig, &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: utils.styleLoaders(&#123; <span class="attr">sourceMap</span>: config.dev.cssSourceMap, <span class="attr">usePostCSS</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// cheap-module-eval-source-map is faster for development</span></span><br><span class="line">  devtool: config.dev.devtool,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// these devServer options should be customized in /config/index.js</span></span><br><span class="line">  <span class="comment">// devServer: &#123;</span></span><br><span class="line">  <span class="comment">//   clientLogLevel: 'warning',</span></span><br><span class="line">  <span class="comment">//   historyApiFallback: &#123;</span></span><br><span class="line">  <span class="comment">//     rewrites: [</span></span><br><span class="line">  <span class="comment">//       &#123; from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') &#125;,</span></span><br><span class="line">  <span class="comment">//     ],</span></span><br><span class="line">  <span class="comment">//   &#125;,</span></span><br><span class="line">  <span class="comment">//   hot: true,</span></span><br><span class="line">  <span class="comment">//   contentBase: false, // since we use CopyWebpackPlugin.</span></span><br><span class="line">  <span class="comment">//   compress: true,</span></span><br><span class="line">  <span class="comment">//   host: HOST || config.dev.host,</span></span><br><span class="line">  <span class="comment">//   port: PORT || config.dev.port,</span></span><br><span class="line">  <span class="comment">//   open: config.dev.autoOpenBrowser,</span></span><br><span class="line">  <span class="comment">//   overlay: config.dev.errorOverlay</span></span><br><span class="line">  <span class="comment">//     ? &#123; warnings: false, errors: true &#125;</span></span><br><span class="line">  <span class="comment">//     : false,</span></span><br><span class="line">  <span class="comment">//   publicPath: config.dev.assetsPublicPath,</span></span><br><span class="line">  <span class="comment">//   proxy: config.dev.proxyTable,</span></span><br><span class="line">  <span class="comment">//   quiet: true, // necessary for FriendlyErrorsPlugin</span></span><br><span class="line">  <span class="comment">//   watchOptions: &#123;</span></span><br><span class="line">  <span class="comment">//     poll: config.dev.poll,</span></span><br><span class="line">  <span class="comment">//   &#125;</span></span><br><span class="line">  <span class="comment">// &#125;,</span></span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.DefinePlugin(&#123;</span><br><span class="line">      <span class="string">'process.env'</span>: <span class="built_in">require</span>(<span class="string">'../config/dev.env'</span>)</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> webpack.HotModuleReplacementPlugin(),</span><br><span class="line">    <span class="keyword">new</span> webpack.NamedModulesPlugin(), <span class="comment">// HMR shows correct file names in console on update.</span></span><br><span class="line">    <span class="keyword">new</span> webpack.NoEmitOnErrorsPlugin(),</span><br><span class="line">    <span class="comment">// https://github.com/ampedandwired/html-webpack-plugin</span></span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      filename: <span class="string">'index.html'</span>,</span><br><span class="line">      template: <span class="string">'index.html'</span>,</span><br><span class="line">      inject: <span class="literal">true</span></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// copy custom static assets</span></span><br><span class="line">    <span class="keyword">new</span> CopyWebpackPlugin([</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">from</span>: path.resolve(__dirname, <span class="string">'../static'</span>),</span><br><span class="line">        to: config.dev.assetsSubDirectory,</span><br><span class="line">        ignore: [<span class="string">'.*'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    ])</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = devWebpackConfig</span><br><span class="line"></span><br><span class="line"><span class="comment">// module.exports = new Promise((resolve, reject) =&gt; &#123;</span></span><br><span class="line"><span class="comment">//   portfinder.basePort = process.env.PORT || config.dev.port</span></span><br><span class="line"><span class="comment">//   portfinder.getPort((err, port) =&gt; &#123;</span></span><br><span class="line"><span class="comment">//     if (err) &#123;</span></span><br><span class="line"><span class="comment">//       reject(err)</span></span><br><span class="line"><span class="comment">//     &#125; else &#123;</span></span><br><span class="line"><span class="comment">//       // publish the new Port, necessary for e2e tests</span></span><br><span class="line"><span class="comment">//       process.env.PORT = port</span></span><br><span class="line"><span class="comment">//       // add port to devServer config</span></span><br><span class="line"><span class="comment">//       devWebpackConfig.devServer.port = port</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//       // Add FriendlyErrorsPlugin</span></span><br><span class="line"><span class="comment">//       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin(&#123;</span></span><br><span class="line"><span class="comment">//         compilationSuccessInfo: &#123;</span></span><br><span class="line"><span class="comment">//           messages: [`Your application is running here: http://$&#123;devWebpackConfig.devServer.host&#125;:$&#123;port&#125;`],</span></span><br><span class="line"><span class="comment">//         &#125;,</span></span><br><span class="line"><span class="comment">//         onErrors: config.dev.notifyOnErrors</span></span><br><span class="line"><span class="comment">//         ? utils.createNotifierCallback()</span></span><br><span class="line"><span class="comment">//         : undefined</span></span><br><span class="line"><span class="comment">//       &#125;))</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//       resolve(devWebpackConfig)</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//   &#125;)</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因为要用自己搭建的 Express 服务器，所以把 webpack-dev-server 相关的配置都注释掉或者删掉，然后把开发环境的配置 devWebpackConfig 导出</p>
+</blockquote>
+<h3 id="创建开发环境服务器启动文件"><a href="#创建开发环境服务器启动文件" class="headerlink" title="创建开发环境服务器启动文件"></a>创建开发环境服务器启动文件</h3><p>在项目根目录下创建 dev-server.js 文件，用于启动开发环境下的服务器。内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="built_in">require</span>(<span class="string">'./server/app'</span>)</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</span><br><span class="line"><span class="keyword">const</span> webpackDevMiddleware = <span class="built_in">require</span>(<span class="string">'webpack-dev-middleware'</span>)</span><br><span class="line"><span class="keyword">const</span> webpackHotMiddleware = <span class="built_in">require</span>(<span class="string">'webpack-hot-middleware'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">'./build/webpack.dev.conf'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> compiler = webpack(config)</span><br><span class="line"><span class="comment">// webpack 中间件</span></span><br><span class="line">app.use(webpackDevMiddleware(compiler, &#123;</span><br><span class="line">  publicPath: config.output.publicPath,</span><br><span class="line">  stats: &#123; <span class="attr">colors</span>: <span class="literal">true</span> &#125;</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line">app.use(webpackHotMiddleware(compiler))</span><br><span class="line"></span><br><span class="line"><span class="comment">// Start the server</span></span><br><span class="line"><span class="keyword">const</span> port = process.env.PORT || <span class="number">3000</span></span><br><span class="line">app.listen(port, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">`Server listening at <span class="subst">$&#123;port&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="安装依赖-1"><a href="#安装依赖-1" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D webpack-dev-middleware@1.12.2 webpack-hot-middleware</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D webpack-dev-middleware@1.12.2 webpack-hot-middleware</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这里要注意，最新版本的 webpack-dev-middleware 插件只支持 webpack4 ，然而我们要升级到 Webpack4 需要修改 extract-text-webpack-plugin , webpack.optimize.CommonsChunkPlugin 等插件的配置，太过于繁琐。所以我们这里使用 <a href="mailto:webpack-dev-middleware@1.12.2" target="_blank" rel="noopener">webpack-dev-middleware@1.12.2</a> </p>
+</blockquote>
+<p>现在，我们可以试下运行下面的命令，来启动开发环境的服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node dev-server.js</span><br></pre></td></tr></table></figure></p>
+<h2 id="搭建生产环境"><a href="#搭建生产环境" class="headerlink" title="搭建生产环境"></a>搭建生产环境</h2><h3 id="修改-webpack-配置-1"><a href="#修改-webpack-配置-1" class="headerlink" title="修改 webpack 配置"></a>修改 webpack 配置</h3><p>修改生产环境的 webpack 配置，主要是修改<code>config/index.js</code>文件，修改内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="comment">// Template version: 1.3.1</span></span><br><span class="line"><span class="comment">// see http://vuejs-templates.github.io/webpack for documentation.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  dev: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line">    proxyTable: &#123;&#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Various Dev Server settings</span></span><br><span class="line">    host: <span class="string">'localhost'</span>, <span class="comment">// can be overwritten by process.env.HOST</span></span><br><span class="line">    port: <span class="number">8080</span>, <span class="comment">// can be overwritten by process.env.PORT, if port is in use, a free one will be determined</span></span><br><span class="line">    autoOpenBrowser: <span class="literal">false</span>,</span><br><span class="line">    errorOverlay: <span class="literal">true</span>,</span><br><span class="line">    notifyOnErrors: <span class="literal">true</span>,</span><br><span class="line">    poll: <span class="literal">false</span>, <span class="comment">// https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use Eslint Loader?</span></span><br><span class="line">    <span class="comment">// If true, your code will be linted during bundling and</span></span><br><span class="line">    <span class="comment">// linting errors and warnings will be shown in the console.</span></span><br><span class="line">    useEslint: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// If true, eslint errors and warnings will also be shown in the error overlay</span></span><br><span class="line">    <span class="comment">// in the browser.</span></span><br><span class="line">    showEslintErrorsInOverlay: <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Source Maps</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// https://webpack.js.org/configuration/devtool/#development</span></span><br><span class="line">    devtool: <span class="string">'cheap-module-eval-source-map'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If you have problems debugging vue-files in devtools,</span></span><br><span class="line">    <span class="comment">// set this to false - it *may* help</span></span><br><span class="line">    <span class="comment">// https://vue-loader.vuejs.org/en/options.html#cachebusting</span></span><br><span class="line">    cacheBusting: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">    cssSourceMap: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  build: &#123;</span><br><span class="line">    <span class="comment">// Template for index.html</span></span><br><span class="line">    <span class="comment">// index: path.resolve(__dirname, '../dist/index.html'),</span></span><br><span class="line">    index: path.resolve(__dirname, <span class="string">'../server/public/index.html'</span>),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Paths</span></span><br><span class="line">    <span class="comment">// assetsRoot: path.resolve(__dirname, '../dist'),</span></span><br><span class="line">    assetsRoot: path.resolve(__dirname, <span class="string">'../server/public'</span>),</span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Source Maps</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    productionSourceMap: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// https://webpack.js.org/configuration/devtool/#production</span></span><br><span class="line">    devtool: <span class="string">'#source-map'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Gzip off by default as many popular static hosts such as</span></span><br><span class="line">    <span class="comment">// Surge or Netlify already gzip all static assets for you.</span></span><br><span class="line">    <span class="comment">// Before setting to `true`, make sure to:</span></span><br><span class="line">    <span class="comment">// npm install --save-dev compression-webpack-plugin</span></span><br><span class="line">    productionGzip: <span class="literal">false</span>,</span><br><span class="line">    productionGzipExtensions: [<span class="string">'js'</span>, <span class="string">'css'</span>],</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the build command with an extra argument to</span></span><br><span class="line">    <span class="comment">// View the bundle analyzer report after build finishes:</span></span><br><span class="line">    <span class="comment">// `npm run build --report`</span></span><br><span class="line">    <span class="comment">// Set to `true` or `false` to always turn it on or off</span></span><br><span class="line">    bundleAnalyzerReport: process.env.npm_config_report</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>主要是把webpack打包的输出文件夹改成了 server/public 文件夹</p>
+</blockquote>
+<h3 id="创建生产环境服务器启动文件"><a href="#创建生产环境服务器启动文件" class="headerlink" title="创建生产环境服务器启动文件"></a>创建生产环境服务器启动文件</h3><p>在项目根目录下创建 prod-server.js 文件，用于启动生产环境下的服务器。内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="built_in">require</span>(<span class="string">'./server/app'</span>)</span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="comment">// 设置HTTP头部，帮助增强Node.JS的Express/Connect等Javascript Web应用安全的中间件。</span></span><br><span class="line"><span class="keyword">const</span> helmet = <span class="built_in">require</span>(<span class="string">'helmet'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Middlewares</span></span><br><span class="line">app.use(helmet())</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态文件目录</span></span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'server/public'</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment">// Catch 404 Errors and forward them to error handler</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Not Found"</span>)</span><br><span class="line">  err.status = <span class="number">404</span></span><br><span class="line">  next(err)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Error handler function</span></span><br><span class="line">app.use(<span class="function">(<span class="params">err, req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> error = app.get(<span class="string">"env"</span>) === <span class="string">"development"</span> ? err : &#123;&#125;</span><br><span class="line">  <span class="keyword">const</span> status = error.status || <span class="number">500</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Response to client</span></span><br><span class="line">  res.status(status).json(&#123;</span><br><span class="line">    error: &#123;</span><br><span class="line">      message: error.message</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Response to ourselves</span></span><br><span class="line">  <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Start the server</span></span><br><span class="line"><span class="keyword">const</span> port = process.env.PORT || <span class="number">4000</span></span><br><span class="line">app.listen(port, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">`Server listening at <span class="subst">$&#123;port&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="安装依赖-2"><a href="#安装依赖-2" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S helmet</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add helmet</span><br></pre></td></tr></table></figure></p>
+<p>到这里其实整个 Vue + Express 的全栈开发环境已经基本搭建完成了。接下来，我们试下用下面的命令来打包前端文件，然后在启动生产环境的服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node prod-server.js</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：至少要打包一次前端代码后再启动生产环境的服务器，不然 server 文件夹下是没有 public 文件夹的</p>
+</blockquote>
+<h1 id="修改项目配置"><a href="#修改项目配置" class="headerlink" title="修改项目配置"></a>修改项目配置</h1><h2 id="修改-package-json"><a href="#修改-package-json" class="headerlink" title="修改 package.json"></a>修改 package.json</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"vue-express-dev-template"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">"A Vue.js + Express Development Environment Template"</span>,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">"林烁壕 &lt;1138674510@qq.com&gt;"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"dev"</span>: <span class="string">"nodemon dev-server.js"</span>,</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"npm run dev"</span>,</span><br><span class="line">    <span class="attr">"lint"</span>: <span class="string">"eslint --ext .js,.vue src"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"node build/build.js"</span>,</span><br><span class="line">    <span class="attr">"prod"</span>: <span class="string">"nodemon prod-server.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建-nodemon-json"><a href="#创建-nodemon-json" class="headerlink" title="创建 nodemon.json"></a>创建 nodemon.json</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"verbose"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"ignore"</span>: [<span class="string">"server/public/"</span>],</span><br><span class="line">  <span class="attr">"events"</span>: &#123;</span><br><span class="line">    <span class="attr">"restart"</span>: <span class="string">"osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"watch"</span>: [<span class="string">"server/"</span>],</span><br><span class="line">  <span class="attr">"env"</span>: &#123;</span><br><span class="line">    <span class="attr">"NODE_ENV"</span>: <span class="string">"development"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"ext"</span>: <span class="string">"js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="安装依赖-3"><a href="#安装依赖-3" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D nodemon</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add nodemon -D</span><br></pre></td></tr></table></figure></p>
+<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>这个项目到这里就已经构建完成了，接下来只要试着运行一下就可以了。</p>
+<p><strong>运行开发模式：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure></p>
+<p><strong>打包前端代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure></p>
+<p><strong>运行生产模式：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run prod</span><br></pre></td></tr></table></figure></p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/blog/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/lsh-anyway">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/blog/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/blog/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/blog/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: '搭建Vue + Express开发环境',
+        owner: 'lsh-anyway',
+        repo: 'blog',
+        oauth: {
+            client_id: '0478482d5ecc64f11dfa',
+            client_secret: 'f805b59f6565fcf067afb65e6db72d993e63c170',
+        },
+    })
+    gitment.render('comment-container')
+</script>
+
+</html>
